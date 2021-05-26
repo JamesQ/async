@@ -2,10 +2,11 @@ package com.example.async.controller;
 
 import com.example.async.service.AsyncService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @RestController
@@ -19,9 +20,16 @@ public class ApiController {
     }
 
     @GetMapping("/hello")
+    public CompletableFuture hello() {
+        log.info("completable future init");
+        return this.asyncService.run();
+    }
+/*
+    @GetMapping("/hello")
     public String hello() {
         this.asyncService.hello();
         log.info("method end...");
         return "hello";
     }
+    */
 }
